@@ -1,0 +1,25 @@
+# Este arquivo deve ser salvo em: .github/workflows/deploy.yml
+# Ele automatiza o envio dos arquivos do GitHub para a Hostinger via FTP
+
+name: Deploy via FTP
+
+on:
+  push:
+    branches:
+      - main # O deploy acontece sempre que você enviar algo para a branch principal
+
+jobs:
+  web-deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v3
+
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ./public_html/ # Pasta padrão da Hostinger
