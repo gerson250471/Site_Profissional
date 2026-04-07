@@ -22,6 +22,7 @@ Integrações de Bancos de Dados.
 
 ## 📁 Estrutura do Projeto
 
+```
 ├── .github/workflows/ # Configurações de Deploy Automático (YAML)
 ├── public/ # Arquivos estáticos (HTML, Imagens, JS)
 │ ├── index.html # Página principal do portfólio
@@ -30,6 +31,7 @@ Integrações de Bancos de Dados.
 ├── package.json # Gerenciador de dependências e scripts
 ├── .gitignore # Arquivos ignorados pelo Git (node_modules, etc)
 └── README.md # Documentação do projeto
+```
 
 ## 🛠️ Como Executar Localmente
 
