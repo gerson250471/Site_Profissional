@@ -1,0 +1,26 @@
+{
+  "name": "MAJB Sistemas",
+  "version": "1.0.0",
+  "description": "Site Profissional",
+  "keywords": [
+    "Portfólio"
+  ],
+  "homepage": "https://github.com/gerson250471/Site_Profissional#readme",
+  "bugs": {
+    "url": "https://github.com/gerson250471/Site_Profissional/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gerson250471/Site_Profissional.git"
+  },
+  "license": "ISC",
+  "author": "Gerson Bernardo",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
