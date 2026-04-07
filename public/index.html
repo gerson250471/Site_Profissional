@@ -43,26 +43,26 @@
           </div>
           <div class="hidden md:block">
             <div
-              class="ml-10 flex items-baseline space-x-8 text-sm font-medium"
+              class="ml-10 flex items-baseline space-x-4 text-sm font-medium"
             >
               <a
                 href="#inicio"
-                class="text-gray-600 hover:text-blue-600 transition font-semibold"
+                class="nav-link text-gray-600 px-4 py-2 rounded-lg transition duration-300 font-semibold"
                 >Início</a
               >
               <a
                 href="#servicos"
-                class="text-gray-600 hover:text-blue-600 transition font-semibold"
+                class="nav-link text-gray-600 px-4 py-2 rounded-lg transition duration-300 font-semibold"
                 >Serviços</a
               >
               <a
                 href="#portfolio"
-                class="text-gray-600 hover:text-blue-600 transition font-semibold"
+                class="nav-link text-gray-600 px-4 py-2 rounded-lg transition duration-300 font-semibold"
                 >Portfólio</a
               >
               <a
                 href="#contato"
-                class="bg-blue-600 text-white px-5 py-2.5 rounded-lg hover:bg-blue-700 transition shadow-sm"
+                class="nav-link text-gray-600 px-4 py-2 rounded-lg transition duration-300 font-semibold"
                 >Fale Comigo</a
               >
             </div>
@@ -464,6 +464,35 @@
           form.classList.add("hidden");
           status.classList.remove("hidden");
         }, 1200);
+      });
+
+      // Lógica para destacar o botão conforme a rolagem (Scroll Spy)
+      const sections = document.querySelectorAll("section");
+      const navLinks = document.querySelectorAll(".nav-link");
+
+      window.addEventListener("scroll", () => {
+        let current = "";
+
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          // Verifica se a rolagem passou do topo da seção (com um pequeno ajuste de 100px)
+          if (pageYOffset >= sectionTop - 100) {
+            current = section.getAttribute("id");
+          }
+        });
+
+        navLinks.forEach((link) => {
+          // Remove a cor azul de todos
+          link.classList.remove("bg-blue-600", "text-white");
+          link.classList.add("text-gray-600");
+
+          // Adiciona azul apenas ao que corresponde à seção atual
+          if (link.getAttribute("href").includes(current)) {
+            link.classList.add("bg-blue-600", "text-white");
+            link.classList.remove("text-gray-600");
+          }
+        });
       });
     </script>
   </body>
