@@ -652,15 +652,34 @@
         // 2. REGISTRO AUTOMÁTICO DE VISITAS NA PLANILHA
         // =======================================================
         if (!sessionStorage.getItem("visitaRegistrada")) {
+          // Captura dados do navegador e dispositivo
+          const infoDispositivo = navigator.userAgent;
+
+          // Captura a origem (de qual site ele veio) ou parâmetros de campanha (UTMs)
+          const parametrosUrl = new URLSearchParams(window.location.search);
+          const termoGoogleAds =
+            parametrosUrl.get("utm_term") || parametrosUrl.get("gclid");
+          const siteOrigem = document.referrer;
+
+          let origemFinal = "Acesso Direto (Digitou o site)";
+          if (termoGoogleAds) origemFinal = "Google Ads / Campanha";
+          else if (siteOrigem) origemFinal = "Veio do site: " + siteOrigem;
+
           fetch(API_URL, {
             method: "POST",
             mode: "no-cors",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ action: "registrarVisita" }),
+            body: JSON.stringify({
+              action: "registrarVisita",
+              dados: {
+                dispositivo: infoDispositivo,
+                origem: origemFinal,
+              },
+            }),
           })
             .then(() => {
               sessionStorage.setItem("visitaRegistrada", "true");
-              console.log("✔️ Visita registrada na planilha do Google Sheets!");
+              console.log("✔️ Visita enriquecida registrada!");
             })
             .catch((err) => console.error("❌ Erro ao registrar visita:", err));
         }

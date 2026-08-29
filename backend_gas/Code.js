@@ -53,23 +53,24 @@ function doPost(e) {
     let result = {};
 
     if (action === 'registrarVisita') {
-      sheetDb.getSheetByName('Visitas').appendRow([new Date()]);
-      result = { status: 'sucesso' };
-    }
-    else if (action === 'novoContato') {
-      const dados = payload.dados;
-      sheetDb.getSheetByName('Contatos').appendRow([new Date(), dados.nome, dados.email, dados.mensagem, 'Novo Lead']);
-      result = { status: 'sucesso' };
-    }
-    else if (action === 'atualizarStatusServico') {
-      const sheet = sheetDb.getSheetByName('Servicos');
-      const data = sheet.getDataRange().getValues();
-      for (let i = 1; i < data.length; i++) {
-        if (data[i][0] == payload.id_servico) {
-          sheet.getRange(i + 1, 4).setValue(payload.novo_status);
-          break;
-        }
-      }
+      const sheet = sheetDb.getSheetByName('Visitas');
+      const dados = payload.dados || {};
+      
+      // Calcula o período do dia
+      const agora = new Date();
+      const hora = agora.getHours();
+      let periodo = 'Madrugada';
+      if (hora >= 6 && hora < 12) periodo = 'Manhã';
+      else if (hora >= 12 && hora < 18) periodo = 'Tarde';
+      else if (hora >= 18 && hora <= 23) periodo = 'Noite';
+
+      // Salva na ordem: Data_Hora | Periodo | Navegador_Dispositivo | Origem_Busca
+      sheet.appendRow([
+        agora, 
+        periodo, 
+        dados.dispositivo || 'Não identificado', 
+        dados.origem || 'Acesso Direto'
+      ]);
       result = { status: 'sucesso' };
     }
     // NOVA ROTA: RECEBER AVALIAÇÃO DO CLIENTE
