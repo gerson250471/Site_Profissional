@@ -1,7 +1,7 @@
 # Este arquivo deve ser salvo em: .github/workflows/deploy.yml
-# Ele automatiza o envio dos arquivos do GitHub para a Hostinger via FTP
+# Ele automatiza o deploy do site na Hostinger e do script no Google
 
-name: Deploy via FTP
+name: Deploy Fullstack (Hostinger + Google)
 
 on:
   push:
@@ -9,8 +9,11 @@ on:
       - main # O deploy acontece sempre que você enviar algo para a branch principal
 
 jobs:
+  # ========================================================
+  # TAREFA 1: Enviar o site (Frontend) para a Hostinger
+  # ========================================================
   web-deploy:
-    name: Deploy
+    name: Deploy FTP (Hostinger)
     runs-on: ubuntu-latest
     steps:
       - name: 🚚 Get latest code
@@ -30,3 +33,31 @@ jobs:
             node_modules/**
             atualizar-versao.js
             package-lock.json
+            backend_gas/**
+
+  # ========================================================
+  # TAREFA 2: Enviar o código (Backend) para o Google
+  # ========================================================
+  gas-deploy:
+    name: Deploy Clasp (Google Apps Script)
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Clasp
+        run: npm install -g @google/clasp
+
+      - name: Setup Clasp Credentials
+        run: |
+          echo '${{ secrets.CLASP_CREDENTIALS }}' > ~/.clasprc.json
+
+      - name: Push to Google Apps Script
+        run: |
+          cd backend_gas
+          clasp push --force
