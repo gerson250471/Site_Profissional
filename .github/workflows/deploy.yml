@@ -1,17 +1,13 @@
 # Este arquivo deve ser salvo em: .github/workflows/deploy.yml
-# Ele automatiza o deploy do site na Hostinger e do script no Google
 
 name: Deploy Fullstack (Hostinger + Google)
 
 on:
   push:
     branches:
-      - main # O deploy acontece sempre que você enviar algo para a branch principal
+      - main
 
 jobs:
-  # ========================================================
-  # TAREFA 1: Enviar o site (Frontend) para a Hostinger
-  # ========================================================
   web-deploy:
     name: Deploy FTP (Hostinger)
     runs-on: ubuntu-latest
@@ -35,9 +31,6 @@ jobs:
             package-lock.json
             backend_gas/**
 
-  # ========================================================
-  # TAREFA 2: Enviar o código (Backend) para o Google
-  # ========================================================
   gas-deploy:
     name: Deploy Clasp (Google Apps Script)
     runs-on: ubuntu-latest
@@ -48,16 +41,25 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
 
       - name: Install Clasp
         run: npm install -g @google/clasp
 
-      - name: Setup Clasp Credentials (Metodo Seguro)
+      - name: Setup e Validação da Credencial (O Detetive)
         run: |
+          # 1. Cria o arquivo usando a Secret
           cat << 'EOF' > ~/.clasprc.json
           ${{ secrets.CLASP_CREDENTIALS }}
           EOF
+
+          # 2. Mostra o tamanho do arquivo (se for muito pequeno, a Secret está vazia)
+          echo "--- VERIFICAÇÃO DE ARQUIVO ---"
+          ls -la ~/.clasprc.json
+
+          # 3. Testa se o texto salvo é um JSON válido
+          echo "--- TESTE DE INTEGRIDADE DO JSON ---"
+          jq empty ~/.clasprc.json
 
       - name: Push to Google Apps Script
         run: |
