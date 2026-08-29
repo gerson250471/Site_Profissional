@@ -24,14 +24,19 @@
       }
     </style>
     <!-- Event snippet for Compra conversion page -->
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=AW-18115248375"
+    ></script>
     <script>
-      gtag("event", "conversion", {
-        send_to: "AW-18115248375/Yc7KCMea06EcEPeBg75D",
-        value: 1.0,
-        currency: "BRL",
-        transaction_id: "",
-        // 'new_customer': true /* calculate dynamically, populate with true/false */,
-      });
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "AW-18115248375");
     </script>
   </head>
   <body class="bg-gray-50 text-gray-900 overflow-x-hidden">
@@ -518,7 +523,7 @@
         <div
           class="md:w-7/12 w-full bg-slate-50 p-10 rounded-3xl border border-gray-100 shadow-sm"
         >
-          <form id="contactForm" class="space-y-6">
+          <form id="formContato" class="space-y-6">
             <div class="grid md:grid-cols-2 gap-6">
               <div>
                 <label class="block text-sm font-bold text-gray-700 mb-2"
@@ -526,6 +531,7 @@
                 >
                 <input
                   type="text"
+                  id="nome"
                   required
                   placeholder="Como devo te chamar?"
                   class="w-full px-5 py-3.5 rounded-xl border border-gray-200 focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition bg-white"
@@ -537,6 +543,7 @@
                 >
                 <input
                   type="email"
+                  id="email"
                   required
                   placeholder="exemplo@email.com"
                   class="w-full px-5 py-3.5 rounded-xl border border-gray-200 focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition bg-white"
@@ -549,6 +556,7 @@
               >
               <textarea
                 rows="5"
+                id="mensagem"
                 required
                 placeholder="Conte-me um pouco sobre o sistema ou automação que você precisa..."
                 class="w-full px-5 py-3.5 rounded-xl border border-gray-200 focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition bg-white"
@@ -613,7 +621,16 @@
         </div>
 
         <div class="text-center md:text-right">
-          <p class="text-gray-500 text-xs">© 2024 MAJB Sistemas</p>
+          <p
+            class="text-gray-500 text-xs flex items-center justify-center md:justify-end gap-2"
+          >
+            © 2026 MAJB Sistemas
+            <span
+              id="app-version"
+              class="bg-slate-800 text-slate-300 px-2 py-0.5 rounded text-[10px] font-bold"
+              >v1.0.1</span
+            >
+          </p>
           <p class="text-gray-550 text-[10px] mt-2 italic">
             "Tudo o que fizerem, façam de todo o coração, como para o Senhor." -
             Colossenses 3:23
@@ -623,55 +640,127 @@
     </footer>
 
     <script>
-      // Inicializa os ícones do Lucide
+      // 1. Inicializa os ícones do Lucide
       lucide.createIcons();
 
-      // Lógica simples do formulário
-      const form = document.getElementById("contactForm");
-      const status = document.getElementById("formStatus");
+      document.addEventListener("DOMContentLoaded", () => {
+        // URL da sua API no Google Apps Script
+        const API_URL =
+          "https://script.google.com/macros/s/AKfycbyR2_Y0Sopp-rh3_gJ_LI9q0gayjo7BFnuRuU2M_IyHmQ7HVQVnc2eI-QywG8cyt6JeZA/exec";
 
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const btn = form.querySelector("button");
-        btn.innerHTML =
-          '<span class="flex items-center justify-center gap-2 italic"><i data-lucide="loader-2" class="animate-spin w-4 h-4"></i> Enviando...</span>';
-        lucide.createIcons(); // Recria o ícone de loader
+        // =======================================================
+        // 2. REGISTRO AUTOMÁTICO DE VISITAS NA PLANILHA
+        // =======================================================
+        if (!sessionStorage.getItem("visitaRegistrada")) {
+          fetch(API_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ action: "registrarVisita" }),
+          })
+            .then(() => {
+              sessionStorage.setItem("visitaRegistrada", "true");
+              console.log("✔️ Visita registrada na planilha do Google Sheets!");
+            })
+            .catch((err) => console.error("❌ Erro ao registrar visita:", err));
+        }
 
-        setTimeout(() => {
-          form.classList.add("hidden");
-          status.classList.remove("hidden");
-        }, 1200);
-      });
+        // =======================================================
+        // 3. INTEGRAÇÃO DO FORMULÁRIO (Google Sheets + Ads)
+        // =======================================================
+        const formContato = document.getElementById("formContato");
+        const status = document.getElementById("formStatus");
 
-      // Lógica para destacar o botão conforme a rolagem (Scroll Spy)
-      const sections = document.querySelectorAll("section");
-      const navLinks = document.querySelectorAll(".nav-link");
+        if (formContato) {
+          formContato.addEventListener("submit", (e) => {
+            e.preventDefault();
 
-      window.addEventListener("scroll", () => {
-        let current = "";
+            // Captura os campos
+            const inputNome = document.getElementById("nome");
+            const inputEmail = document.getElementById("email");
+            const inputMensagem = document.getElementById("mensagem");
+            const btnEnviar = formContato.querySelector(
+              "button[type='submit']",
+            );
 
-        sections.forEach((section) => {
-          const sectionTop = section.offsetTop;
-          const sectionHeight = section.clientHeight;
-          // Verifica se a rolagem passou do topo da seção (com um pequeno ajuste de 100px)
-          if (pageYOffset >= sectionTop - 100) {
-            current = section.getAttribute("id");
-          }
-        });
+            // Efeito visual de carregamento
+            const textoOriginalBtn = btnEnviar.innerHTML;
+            btnEnviar.innerHTML =
+              '<span class="flex items-center justify-center gap-2 italic"><i data-lucide="loader-2" class="animate-spin w-4 h-4"></i> Processando...</span>';
+            btnEnviar.disabled = true;
+            lucide.createIcons();
 
-        navLinks.forEach((link) => {
-          // Remove a cor azul de todos
-          link.classList.remove("bg-blue-600", "text-white");
-          link.classList.add("text-gray-600");
+            // Dispara a conversão para o Google Ads
+            if (typeof gtag === "function") {
+              gtag("event", "conversion", {
+                send_to: "AW-18115248375/Yc7KCMea06EcEPeBg75D",
+                value: 1.0,
+                currency: "BRL",
+              });
+            }
 
-          // Adiciona azul apenas ao que corresponde à seção atual
-          if (link.getAttribute("href").includes(current)) {
-            link.classList.add("bg-blue-600", "text-white");
-            link.classList.remove("text-gray-600");
-          }
+            // Envia os dados para a planilha via Apps Script
+            fetch(API_URL, {
+              method: "POST",
+              mode: "no-cors",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                action: "novoContato",
+                dados: {
+                  nome: inputNome.value,
+                  email: inputEmail.value,
+                  mensagem: inputMensagem.value,
+                },
+              }),
+            })
+              .then(() => {
+                // Sucesso: Esconde formulário e mostra a mensagem verde
+                formContato.classList.add("hidden");
+                status.classList.remove("hidden");
+              })
+              .catch((err) => {
+                alert(
+                  "Ocorreu um erro ao enviar sua mensagem. Tente novamente.",
+                );
+                console.error("Erro no fetch:", err);
+                // Restaura o botão em caso de erro
+                btnEnviar.innerHTML = textoOriginalBtn;
+                btnEnviar.disabled = false;
+              });
+          });
+        }
+
+        // =======================================================
+        // 4. LÓGICA DE DESTAQUE NO MENU (Scroll Spy)
+        // =======================================================
+        const sections = document.querySelectorAll("section");
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        window.addEventListener("scroll", () => {
+          let current = "";
+
+          sections.forEach((section) => {
+            const sectionTop = section.offsetTop;
+            // Verifica se a rolagem passou do topo da seção
+            if (pageYOffset >= sectionTop - 100) {
+              current = section.getAttribute("id");
+            }
+          });
+
+          navLinks.forEach((link) => {
+            // Remove a cor azul de todos
+            link.classList.remove("bg-blue-600", "text-white");
+            link.classList.add("text-gray-600");
+
+            // Adiciona azul apenas ao que corresponde à seção atual
+            if (link.getAttribute("href").includes(current)) {
+              link.classList.add("bg-blue-600", "text-white");
+              link.classList.remove("text-gray-600");
+            }
+          });
         });
       });
     </script>
-    <!-- Estou testando -->
+    <!-- Estou testando 260829 1356 -->
   </body>
 </html>

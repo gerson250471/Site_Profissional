@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Painel Kanban - MAJB Sistemas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Biblioteca para o Drag and Drop -->
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    <style>
+      .kanban-col {
+        min-height: 200px;
+      }
+      .sortable-ghost {
+        opacity: 0.4;
+        background-color: #e2e8f0;
+      }
+
+      /* Estilo da barra de rolagem horizontal do Trello */
+      .board-container {
+        scrollbar-width: thin;
+        scrollbar-color: #cbd5e1 #f1f5f9;
+      }
+      .board-container::-webkit-scrollbar {
+        height: 10px;
+      }
+      .board-container::-webkit-scrollbar-track {
+        background: #f8fafc;
+        border-radius: 8px;
+      }
+      .board-container::-webkit-scrollbar-thumb {
+        background-color: #cbd5e1;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 p-8 h-screen flex flex-col overflow-hidden">
+    <div class="w-full">
+      <h1 class="text-3xl font-bold text-gray-800 mb-8 flex items-center gap-3">
+        <i data-lucide="layout-dashboard"></i> Gestão de Serviços
+      </h1>
+    </div>
+
+    <!-- Quadro Kanban (Scroll Horizontal) -->
+    <div
+      class="flex gap-4 overflow-x-auto pb-4 board-container flex-1 items-start w-full"
+    >
+      <!-- INICIAIS E DE PLANEJAMENTO -->
+      <div class="bg-slate-200 rounded-xl p-4 w-72 shrink-0">
+        <h2
+          class="font-bold text-slate-700 mb-4 flex items-center justify-between text-sm"
+        >
+          A Fazer / Backlog
+          <span
+            class="bg-slate-300 text-slate-800 px-2 py-1 rounded-full text-xs"
+            id="count-Backlog"
+            >0</span
+          >
+        </h2>
+        <div id="Backlog" class="kanban-col space-y-3"></div>
+      </div>
+
+      <div class="bg-slate-200 rounded-xl p-4 w-72 shrink-0">
+        <h2
+          class="font-bold text-slate-700 mb-4 flex items-center justify-between text-sm"
+        >
+          Planejado
+          <span
+            class="bg-slate-300 text-slate-800 px-2 py-1 rounded-full text-xs"
+            id="count-Planejado"
+            >0</span
+          >
+        </h2>
+        <div id="Planejado" class="kanban-col space-y-3"></div>
+      </div>
+
+      <!-- EXECUÇÃO -->
+      <div
+        class="bg-blue-100 rounded-xl p-4 w-72 shrink-0 border-t-4 border-blue-400"
+      >
+        <h2
+          class="font-bold text-blue-800 mb-4 flex items-center justify-between text-sm"
+        >
+          Em Andamento / Em Desenvolvimento
+          <span
+            class="bg-blue-200 text-blue-800 px-2 py-1 rounded-full text-xs"
+            id="count-EmDesenvolvimento"
+            >0</span
+          >
+        </h2>
+        <div id="EmDesenvolvimento" class="kanban-col space-y-3"></div>
+      </div>
+
+      <div
+        class="bg-red-100 rounded-xl p-4 w-72 shrink-0 border-t-4 border-red-400"
+      >
+        <h2
+          class="font-bold text-red-800 mb-4 flex items-center justify-between text-sm"
+        >
+          Impedido / Bloqueado
+          <span
+            class="bg-red-200 text-red-800 px-2 py-1 rounded-full text-xs"
+            id="count-Bloqueado"
+            >0</span
+          >
+        </h2>
+        <div id="Bloqueado" class="kanban-col space-y-3"></div>
+      </div>
+
+      <!-- QUALIDADE E VALIDAÇÃO -->
+      <div
+        class="bg-purple-100 rounded-xl p-4 w-72 shrink-0 border-t-4 border-purple-400"
+      >
+        <h2
+          class="font-bold text-purple-800 mb-4 flex items-center justify-between text-sm"
+        >
+          Em Revisão / Code Review
+          <span
+            class="bg-purple-200 text-purple-800 px-2 py-1 rounded-full text-xs"
+            id="count-CodeReview"
+            >0</span
+          >
+        </h2>
+        <div id="CodeReview" class="kanban-col space-y-3"></div>
+      </div>
+
+      <div
+        class="bg-amber-100 rounded-xl p-4 w-72 shrink-0 border-t-4 border-amber-400"
+      >
+        <h2
+          class="font-bold text-amber-800 mb-4 flex items-center justify-between text-sm"
+        >
+          Em Testes / QA
+          <span
+            class="bg-amber-200 text-amber-800 px-2 py-1 rounded-full text-xs"
+            id="count-QA"
+            >0</span
+          >
+        </h2>
+        <div id="QA" class="kanban-col space-y-3"></div>
+      </div>
+
+      <div
+        class="bg-teal-100 rounded-xl p-4 w-72 shrink-0 border-t-4 border-teal-400"
+      >
+        <h2
+          class="font-bold text-teal-800 mb-4 flex items-center justify-between text-sm"
+        >
+          Homologação / UAT
+          <span
+            class="bg-teal-200 text-teal-800 px-2 py-1 rounded-full text-xs"
+            id="count-UAT"
+            >0</span
+          >
+        </h2>
+        <div id="UAT" class="kanban-col space-y-3"></div>
+      </div>
+
+      <!-- FINALIZAÇÃO -->
+      <div
+        class="bg-green-100 rounded-xl p-4 w-72 shrink-0 border-t-4 border-green-400"
+      >
+        <h2
+          class="font-bold text-green-800 mb-4 flex items-center justify-between text-sm"
+        >
+          Concluído / Done
+          <span
+            class="bg-green-200 text-green-800 px-2 py-1 rounded-full text-xs"
+            id="count-Done"
+            >0</span
+          >
+        </h2>
+        <div id="Done" class="kanban-col space-y-3"></div>
+      </div>
+
+      <div class="bg-gray-200 rounded-xl p-4 w-72 shrink-0 opacity-75">
+        <h2
+          class="font-bold text-gray-600 mb-4 flex items-center justify-between text-sm"
+        >
+          Cancelado
+          <span
+            class="bg-gray-300 text-gray-700 px-2 py-1 rounded-full text-xs"
+            id="count-Cancelado"
+            >0</span
+          >
+        </h2>
+        <div id="Cancelado" class="kanban-col space-y-3"></div>
+      </div>
+    </div>
+
+    <script>
+      lucide.createIcons();
+
+      // Lista com os IDs exatos de todas as colunas
+      const IDs_COLUNAS = [
+        "Backlog",
+        "Planejado",
+        "EmDesenvolvimento",
+        "Bloqueado",
+        "CodeReview",
+        "QA",
+        "UAT",
+        "Done",
+        "Cancelado",
+      ];
+
+      const API_URL =
+        "https://script.google.com/macros/s/AKfycbyR2_Y0Sopp-rh3_gJ_LI9q0gayjo7BFnuRuU2M_IyHmQ7HVQVnc2eI-QywG8cyt6JeZA/exec";
+
+      document.addEventListener("DOMContentLoaded", () => {
+        carregarServicos();
+      });
+
+      function carregarServicos() {
+        fetch(API_URL)
+          .then((response) => response.json())
+          .then((dados) => {
+            renderizarCartoes(dados);
+            inicializarDragAndDrop();
+          })
+          .catch((erro) => console.error("Erro ao carregar dados:", erro));
+      }
+
+      function renderizarCartoes(servicos) {
+        // Limpa todas as colunas usando o array
+        IDs_COLUNAS.forEach((id) => {
+          const coluna = document.getElementById(id);
+          if (coluna) coluna.innerHTML = "";
+        });
+
+        servicos.forEach((servico) => {
+          if (!servico.id) return;
+
+          const cartao = `
+                    <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 cursor-grab hover:shadow-md transition-shadow" data-id="${servico.id}">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider bg-slate-100 px-2 py-0.5 rounded">${servico.id}</span>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm mb-1">${servico.cliente}</h3>
+                        <p class="text-xs text-gray-500 line-clamp-2">${servico.descricao}</p>
+                    </div>
+                `;
+
+          const coluna = document.getElementById(servico.status);
+          if (coluna) {
+            coluna.innerHTML += cartao;
+          }
+        });
+        atualizarContadores();
+      }
+
+      function inicializarDragAndDrop() {
+        IDs_COLUNAS.forEach((colunaId) => {
+          const el = document.getElementById(colunaId);
+          if (el) {
+            new Sortable(el, {
+              group: "kanban",
+              animation: 150,
+              ghostClass: "sortable-ghost",
+              onEnd: function (evt) {
+                const itemEl = evt.item;
+                const idServico = itemEl.getAttribute("data-id");
+                const novoStatus = evt.to.id;
+
+                atualizarContadores();
+                atualizarPlanilha(idServico, novoStatus);
+              },
+            });
+          }
+        });
+      }
+
+      function atualizarContadores() {
+        IDs_COLUNAS.forEach((id) => {
+          const coluna = document.getElementById(id);
+          const contador = document.getElementById(`count-${id}`);
+          if (coluna && contador) {
+            contador.innerText = coluna.children.length;
+          }
+        });
+      }
+
+      function atualizarPlanilha(id, novoStatus) {
+        fetch(API_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            action: "atualizarStatusServico",
+            id_servico: id,
+            novo_status: novoStatus,
+          }),
+        })
+          .then(() => {
+            console.log(`Serviço ${id} movido para ${novoStatus}`);
+          })
+          .catch((erro) => console.error("Erro ao atualizar status:", erro));
+      }
+    </script>
+  </body>
+</html>

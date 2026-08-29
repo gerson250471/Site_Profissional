@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
+    "versao": "node atualizar-versao.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

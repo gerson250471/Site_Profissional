@@ -1,6 +1,5 @@
 # Este arquivo deve ser salvo em: .github/workflows/deploy.yml
 # Ele automatiza o envio dos arquivos do GitHub para a Hostinger via FTP
-# Estou Aprendendo
 
 name: Deploy via FTP
 
@@ -24,3 +23,10 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: ./public_html/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github*/**
+            node_modules/**
+            atualizar-versao.js
+            package-lock.json
