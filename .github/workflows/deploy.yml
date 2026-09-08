@@ -9,7 +9,7 @@ on:
 
 jobs:
   # ========================================================
-  # TAREFA 1: Enviar o site (Frontend) para a Hostinger novo
+  # TAREFA 1: Enviar o site (Frontend) para a Hostinger
   # ========================================================
   web-deploy:
     name: Deploy FTP (Hostinger)
