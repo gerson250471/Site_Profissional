@@ -69,7 +69,8 @@ function doPost(e) {
         agora, 
         periodo, 
         dados.dispositivo || 'Não identificado', 
-        dados.origem || 'Acesso Direto'
+        dados.origem || 'Acesso Direto',
+        dados.localizacao || 'Não identificada' // <--- NOVA LINHA AQUI
       ]);
       result = { status: 'sucesso' };
     }
