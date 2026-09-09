@@ -652,10 +652,8 @@
         // 2. REGISTRO AUTOMÁTICO DE VISITAS NA PLANILHA
         // =======================================================
         if (!sessionStorage.getItem("visitaRegistrada")) {
-          // 1. Captura dados do navegador e dispositivo
+          // 1. Captura dados básicos
           const infoDispositivo = navigator.userAgent;
-
-          // 2. Captura a origem (de qual site ele veio) ou parâmetros de campanha
           const parametrosUrl = new URLSearchParams(window.location.search);
           const termoGoogleAds =
             parametrosUrl.get("utm_term") || parametrosUrl.get("gclid");
@@ -665,18 +663,22 @@
           if (termoGoogleAds) origemFinal = "Google Ads / Campanha";
           else if (siteOrigem) origemFinal = "Veio do site: " + siteOrigem;
 
-          // 3. Busca a localização via IP e depois envia TUDO para o Google Sheets
+          // 2. Tenta buscar o IP. Se falhar (ex: AdBlock), não quebra o sistema.
           fetch("https://ipapi.co/json/")
             .then((resposta) => resposta.json())
             .then((geo) => {
-              // Monta a string no formato: Cidade - Estado, País
-              let localUsuario = "Não identificada";
               if (geo.city && geo.region && geo.country_name) {
-                localUsuario = `${geo.city} - ${geo.region}, ${geo.country_name}`;
+                return `${geo.city} - ${geo.region}, ${geo.country_name}`;
               }
-
-              // Dispara para a sua API no Apps Script
-              return fetch(API_URL, {
+              return "Não identificada";
+            })
+            .catch(() => {
+              // Se o navegador bloquear a API, definimos um valor padrão
+              return "Bloqueado pelo Navegador/AdBlock";
+            })
+            .then((localUsuario) => {
+              // 3. Independentemente do resultado do IP, envia para a sua Planilha!
+              fetch(API_URL, {
                 method: "POST",
                 mode: "no-cors",
                 headers: { "Content-Type": "application/json" },
@@ -685,16 +687,14 @@
                   dados: {
                     dispositivo: infoDispositivo,
                     origem: origemFinal,
-                    localizacao: localUsuario, // Enviando o novo dado
+                    localizacao: localUsuario,
                   },
                 }),
+              }).then(() => {
+                sessionStorage.setItem("visitaRegistrada", "true");
+                console.log("✔️ Visita registrada com sucesso no Sheets!");
               });
-            })
-            .then(() => {
-              sessionStorage.setItem("visitaRegistrada", "true");
-              console.log("✔️ Visita com localização registrada!");
-            })
-            .catch((err) => console.error("❌ Erro ao registrar visita:", err));
+            });
         }
 
         // =======================================================
