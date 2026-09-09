@@ -52,11 +52,11 @@ function doPost(e) {
     const sheetDb = SpreadsheetApp.openById(SPREADSHEET_ID);
     let result = {};
 
+    // 1. ROTA: REGISTRO DE VISITAS
     if (action === 'registrarVisita') {
       const sheet = sheetDb.getSheetByName('Visitas');
       const dados = payload.dados || {};
       
-      // Calcula o período do dia
       const agora = new Date();
       const hora = agora.getHours();
       let periodo = 'Madrugada';
@@ -64,23 +64,38 @@ function doPost(e) {
       else if (hora >= 12 && hora < 18) periodo = 'Tarde';
       else if (hora >= 18 && hora <= 23) periodo = 'Noite';
 
-      // Salva na ordem: Data_Hora | Periodo | Navegador_Dispositivo | Origem_Busca
       sheet.appendRow([
         agora, 
         periodo, 
         dados.dispositivo || 'Não identificado', 
         dados.origem || 'Acesso Direto',
-        dados.localizacao || 'Não identificada' // <--- NOVA LINHA AQUI
+        dados.localizacao || 'Não identificada'
       ]);
       result = { status: 'sucesso' };
     }
-    // NOVA ROTA: RECEBER AVALIAÇÃO DO CLIENTE
+    
+    // 2. ROTA: RECEBER AVALIAÇÃO DO CLIENTE
     else if (action === 'novaAvaliacao') {
       const sheet = sheetDb.getSheetByName('Avaliacoes');
       const dados = payload.dados;
-      // Insere: Data, Cliente, Nota, Depoimento, Publicar (Padrão: Não)
       sheet.appendRow([new Date(), dados.cliente, dados.nota, dados.depoimento, 'Não']);
       result = { status: 'sucesso', mensagem: 'Avaliação enviada para moderação.' };
+    }
+    
+    // 3. ROTA: FORMULÁRIO DE CONTATO (NOVA)
+    else if (action === 'novoContato') {
+      const sheetContatos = sheetDb.getSheetByName('Contatos');
+      const dados = payload.dados || {};
+      
+      // Salva na ordem: Data_Hora | Nome | E-mail | Mensagem | Status
+      sheetContatos.appendRow([
+        new Date(), 
+        dados.nome, 
+        dados.email, 
+        dados.mensagem, 
+        'Novo' 
+      ]);
+      result = { status: 'sucesso', mensagem: 'Contato registrado.' };
     }
 
     return ContentService.createTextOutput(JSON.stringify(result)).setMimeType(ContentService.MimeType.JSON);
