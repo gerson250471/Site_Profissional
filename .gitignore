@@ -26,3 +26,6 @@ pnpm-debug.log*
 .next/ # Next.js
 .nuxt/ # Nuxt.js
 .svelte-kit/ # SvelteKit
+
+# Vou ignorar src temporáriamente
+src/

@@ -3,11 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MAJB Sistemas | Analista de Sistemas & Desenvolvedor MEI</title>
+    <title>MAJB Sistemas | Gestão de Processos e Soluções Empresariais</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Fontes e Ícones -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -22,6 +22,70 @@
         max-height: 40px;
         width: auto;
       }
+
+      /* Identidade MAJB: marinho #0B1F3A, azul #1E73BE, cinza #E5E7EB. */
+      :root { --brand-navy:#0B1F3A; --brand-blue:#1E73BE; --brand-gray:#E5E7EB; }
+      html { scroll-behavior:smooth; scroll-padding-top:88px; }
+      body { background:#fff; color:var(--brand-navy); }
+      h1,h2,h3,h4,h5,.brand-wordmark { font-family:'Montserrat','Inter',sans-serif; }
+      h1 { letter-spacing:-.045em; line-height:1.12!important; max-width:1000px; }
+      h2 { letter-spacing:-.035em; }
+      .brand-wordmark { color:var(--brand-navy)!important; font-weight:800; letter-spacing:-.04em; }
+      nav { background:rgba(255,255,255,.97)!important; border-bottom:1px solid var(--brand-gray); box-shadow:none!important; }
+      .hero-gradient { background:radial-gradient(ellipse at 80% 10%,#164a78 0%,transparent 52%),linear-gradient(125deg,#0B1F3A,#102e50); position:relative; }
+      .brand-eyebrow { font-size:11px; line-height:1.7; letter-spacing:.19em; font-weight:600; color:#b6d8f6; margin-bottom:28px; }
+      #inicio { padding-top:150px; padding-bottom:96px; }
+      #inicio .text-gray-300 { color:#d4dfeb; }
+      #inicio .text-blue-400,#inicio .text-yellow-400 { color:#a8d5fc; }
+      .bg-blue-600 { background-color:var(--brand-blue)!important; }
+      .text-blue-600,.text-green-600,.text-purple-600,.text-yellow-600 { color:var(--brand-blue)!important; }
+      .bg-blue-50,.bg-green-50,.bg-yellow-50,.bg-purple-50 { background-color:#edf5fc!important; }
+      .bg-blue-700,.bg-purple-700 { background-color:var(--brand-navy)!important; }
+      .bg-emerald-600 { background-color:#164e7a!important; }
+      .bg-emerald-500,.bg-purple-600 { background-color:var(--brand-blue)!important; }
+      .text-emerald-600 { color:var(--brand-blue)!important; }
+      .bg-emerald-50 { background-color:#edf5fc!important; }
+      .bg-slate-50,.bg-gray-50 { background-color:#f5f7fa!important; }
+      .border-gray-100,.border-gray-200 { border-color:var(--brand-gray)!important; }
+      .text-gray-800,.text-gray-900 { color:var(--brand-navy)!important; }
+      .text-gray-600 { color:#4d5e70; }
+      .hover\:bg-blue-700:hover { background-color:#175a95!important; }
+      .nav-link.text-white { color:#fff!important; }
+      #servicos .rounded-3xl,#portfolio .rounded-3xl { border-radius:18px; }
+      #portfolio .h-56 { height:190px; }
+      #contato { background:#fff!important; }
+      #contato form { text-align:left; }
+      footer { background:var(--brand-navy)!important; border-top:4px solid var(--brand-blue); }
+      footer .text-gray-500,footer .text-gray-550 { color:#b9c8da!important; }
+      footer .text-gray-800 { color:#fff!important; }
+      :focus-visible { outline:3px solid #6bb6f3; outline-offset:4px; }
+      @media(max-width:640px) {
+        #inicio { padding-top:116px; padding-bottom:64px; }
+        h1 { font-size:36px!important; }
+        .brand-eyebrow { max-width:280px; font-size:10px; }
+        #contato .p-10 { padding:24px; }
+        section.py-24 { padding-top:64px; padding-bottom:64px; }
+      }
+      @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } * { transition:none!important; } }
+
+      .brand-logo { display:block; position:relative; width:178px; aspect-ratio:2.94; overflow:hidden; background:#fff; border-radius:4px; }
+      .brand-logo img { position:absolute; width:174%; max-width:none; height:auto; left:-19.4%; top:-57.5%; }
+      .brand-logo-full { width:100%; aspect-ratio:1.78; border-radius:0; }
+      .brand-logo-full img { top:-34.8%; }
+      .hero-content { display:grid; grid-template-columns:1.15fr 1fr; column-gap:64px; align-items:center; text-align:left; }
+      .hero-content>h1,.hero-content>p,.hero-content>.brand-eyebrow,.hero-content>.flex { grid-column:1; }
+      .hero-content h1 { font-size:clamp(36px,4vw,54px); }
+      .hero-content h1 br { display:none; }
+      .hero-brand-card { grid-column:2; grid-row:1 / 5; padding:24px; background:#fff; border-radius:20px; box-shadow:0 24px 64px #0003; }
+      .hero-content .brand-eyebrow { margin-bottom:24px; }
+      footer .brand-logo { width:210px; border:8px solid #fff; box-sizing:content-box; }
+      @media(max-width:900px) {
+        .hero-content { display:flex; flex-direction:column; text-align:center; }
+        .hero-brand-card { order:-1; width:min(100%,400px); margin-bottom:36px; padding:16px; }
+        .hero-content .brand-eyebrow { display:none; }
+        .hero-content h1 { max-width:680px; }
+      }
+      @media(max-width:640px) { .brand-logo { width:152px; } .brand-logo-full { width:100%; } .hero-brand-card { max-width:320px; } }
     </style>
     <!-- Event snippet for Compra conversion page -->
     <!-- Google tag (gtag.js) -->
@@ -36,7 +100,7 @@
       }
       gtag("js", new Date());
 
-      gtag("config", "AW-18115248375");
+      if (location.protocol === "https:" && !["localhost", "127.0.0.1"].includes(location.hostname)) gtag("config", "AW-18115248375");
     </script>
   </head>
   <body class="bg-gray-50 text-gray-900 overflow-x-hidden">
@@ -46,15 +110,7 @@
         <div class="flex justify-between h-16 items-center">
           <div class="flex-shrink-0 flex items-center gap-3">
             <!-- Logo Image -->
-            <img
-              src="Logo-pq.jpg"
-              alt="Logo MAJB Sistemas"
-              class="logo-img rounded"
-              onerror="this.style.display = 'none'"
-            />
-            <span class="text-xl font-bold text-blue-600 tracking-tight"
-              >MAJB SISTEMAS</span
-            >
+<a href="#inicio" aria-label="MAJB Sistemas — início"><span class="brand-logo"><img src="logo-majb.png" alt="MAJB Sistemas" width="2392" height="1636" /></span></a>
           </div>
           <div class="hidden md:block">
             <div
@@ -88,17 +144,11 @@
 
     <!-- Seção Hero (Início) -->
     <section id="inicio" class="hero-gradient pt-40 pb-24 px-4 text-white">
-      <div class="max-w-7xl mx-auto flex flex-col items-center text-center">
-        <div class="mb-8">
-          <img
-            src="Logo-pq.jpg"
-            alt="MAJB SISTEMAS"
-            class="w-20 h-20 rounded-full border-2 border-blue-400/30 p-1 bg-white/10"
-            onerror="this.style.display = 'none'"
-          />
-        </div>
+      <div class="max-w-7xl mx-auto hero-content">
+        <div class="hero-brand-card"><div class="brand-logo brand-logo-full"><img src="logo-majb.png" alt="MAJB Sistemas — Consultoria em Gestão de Processos e Desenvolvimento de Soluções Empresariais. Transformando processos em soluções." width="2392" height="1636" /></div></div>
+        <div class="brand-eyebrow">GESTÃO DE PROCESSOS E SOLUÇÕES EMPRESARIAIS</div>
         <h1 class="text-4xl md:text-6xl font-bold mb-6">
-          Automação Inteligente para seus Negócios
+          Transformando processos<br class="hidden md:block" /> em soluções.
         </h1>
         <p class="text-xl text-gray-300 max-w-2xl mb-10 leading-relaxed">
           Especialista em transformar fluxos manuais em sistemas automáticos.
@@ -109,8 +159,8 @@
         </p>
         <div class="flex flex-col sm:flex-row gap-4">
           <a
-            href="https://wa.me/5512996621957?text=Olá%20Gerson,%20vi%20o%20anúncio%20da%20MAJB%20Sistemas%20e%20gostaria%20de%20uma%20consultoria%20sobre%20automação."
-            target="_blank"
+            href="https://wa.me/5512996621957?text=Ol%C3%A1%20Gerson%2C%20vim%20pelo%20site%20MAJB%20Sistemas%20e%20quero%20conversar%20sobre%20uma%20melhoria%20nos%20processos%20da%20minha%20empresa."
+            target="_blank" rel="noopener noreferrer"
             class="bg-blue-600 px-8 py-4 rounded-xl font-bold hover:bg-blue-700 transition flex items-center justify-center gap-2 shadow-lg shadow-blue-900/20"
           >
             <i data-lucide="message-square" class="w-5 h-5"></i> Solicitar
@@ -130,7 +180,7 @@
     <section id="servicos" class="py-24 px-4">
       <div class="max-w-7xl mx-auto">
         <div class="text-center mb-16">
-          <h2 class="text-3xl font-bold mb-4">Soluções Especializadas MEI</h2>
+          <h2 class="text-3xl font-bold mb-4">Soluções para sua empresa</h2>
           <div class="h-1.5 w-24 bg-blue-600 mx-auto rounded-full"></div>
         </div>
 
@@ -356,113 +406,6 @@
         </div>
       </div>
     </section>
-    <!-- AVALIAÇÃO DOS CLIENTES -->
-    <section id="avaliacoes" class="py-24 px-4 bg-white">
-      <div class="max-w-7xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl font-bold mb-4">O que dizem meus clientes</h2>
-          <div class="h-1.5 w-24 bg-blue-600 mx-auto rounded-full"></div>
-        </div>
-
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div
-            class="bg-slate-50 p-8 rounded-3xl border border-gray-100 shadow-sm relative hover:shadow-md transition duration-300"
-          >
-            <i
-              data-lucide="quote"
-              class="w-10 h-10 text-blue-100 absolute top-6 right-6"
-            ></i>
-            <div class="flex gap-1 mb-4 text-yellow-400">
-              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
-              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
-              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
-              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
-              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
-            </div>
-            <p class="text-gray-600 italic mb-6 leading-relaxed relative z-10">
-              "O Gerson transformou completamente nossa rotina. As planilhas e
-              relatórios que antes levavam horas agora são processados
-              rapidamente com as automações que ele criou."
-            </p>
-            <div class="flex items-center gap-4">
-              <div
-                class="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-xl"
-              >
-                C
-              </div>
-              <div>
-                <h5 class="font-bold text-gray-900">Cliente Exemplo</h5>
-                <p class="text-sm text-gray-500">Gestor de Operações</p>
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="bg-slate-50 p-8 rounded-3xl border border-gray-100 shadow-sm relative hover:shadow-md transition duration-300"
-          >
-            <i
-              data-lucide="quote"
-              class="w-10 h-10 text-blue-100 absolute top-6 right-6"
-            ></i>
-            <div class="flex gap-1 mb-4 text-yellow-400">
-              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
-              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
-              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
-              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
-              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
-            </div>
-            <p class="text-gray-600 italic mb-6 leading-relaxed relative z-10">
-              "Profissionalismo e entrega no prazo. O banco de dados em Access
-              ficou excelente e super intuitivo para a nossa equipe comercial
-              usar no dia a dia."
-            </p>
-            <div class="flex items-center gap-4">
-              <div
-                class="w-12 h-12 bg-emerald-600 text-white rounded-full flex items-center justify-center font-bold text-xl"
-              >
-                M
-              </div>
-              <div>
-                <h5 class="font-bold text-gray-900">Outro Cliente</h5>
-                <p class="text-sm text-gray-500">Diretora Comercial</p>
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="bg-slate-50 p-8 rounded-3xl border border-gray-100 shadow-sm relative hover:shadow-md transition duration-300"
-          >
-            <i
-              data-lucide="quote"
-              class="w-10 h-10 text-blue-100 absolute top-6 right-6"
-            ></i>
-            <div class="flex gap-1 mb-4 text-yellow-400">
-              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
-              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
-              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
-              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
-              <i data-lucide="star" class="w-5 h-5 fill-current"></i>
-            </div>
-            <p class="text-gray-600 italic mb-6 leading-relaxed relative z-10">
-              "A transição das nossas ferramentas para o Google Workspace ficou
-              muito mais fácil com os scripts desenvolvidos. Excelente
-              consultoria."
-            </p>
-            <div class="flex items-center gap-4">
-              <div
-                class="w-12 h-12 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold text-xl"
-              >
-                E
-              </div>
-              <div>
-                <h5 class="font-bold text-gray-900">Mais um Cliente</h5>
-                <p class="text-sm text-gray-500">Coordenador de TI</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
     <!-- Seção Contato -->
     <section id="contato" class="py-24 px-4 bg-slate-50">
       <div
@@ -477,7 +420,7 @@
 
           <div class="space-y-6">
             <a
-              href="mailto:gerson_bernardo@majb.sistemas.com.br"
+              href="mailto:gerson_bernardo@majbsistemas.com"
               class="flex items-center gap-5 group"
             >
               <div
@@ -492,13 +435,13 @@
                   E-mail Profissional
                 </p>
                 <p class="font-semibold text-gray-800 text-lg break-all">
-                  gerson_bernardo@majbsistemas.com.br
+                  gerson_bernardo@majbsistemas.com
                 </p>
               </div>
             </a>
             <a
-              href="https://wa.me/5512996621957?text=Olá%20Gerson,%20vi%20o%20anúncio%20da%20MAJB%20Sistemas%20e%20gostaria%20de%20uma%20consultoria%20sobre%20automação%20de%20processos%20e%20soluções%20em%20nuvem."
-              target="_blank"
+              href="https://wa.me/5512996621957?text=Ol%C3%A1%20Gerson%2C%20vim%20pelo%20site%20MAJB%20Sistemas%20e%20quero%20conversar%20sobre%20uma%20melhoria%20nos%20processos%20da%20minha%20empresa."
+              target="_blank" rel="noopener noreferrer"
               class="flex items-center gap-5 group"
             >
               <div
@@ -524,6 +467,9 @@
           class="md:w-7/12 w-full bg-slate-50 p-10 rounded-3xl border border-gray-100 shadow-sm"
         >
           <form id="formContato" class="space-y-6">
+            <div style="position:absolute;left:-10000px" aria-hidden="true">
+              <label for="website">Website</label><input id="website" name="website" tabindex="-1" autocomplete="off" />
+            </div>
             <div class="grid md:grid-cols-2 gap-6">
               <div>
                 <label class="block text-sm font-bold text-gray-700 mb-2"
@@ -531,7 +477,7 @@
                 >
                 <input
                   type="text"
-                  id="nome"
+                  id="nome" minlength="2" maxlength="120" autocomplete="name"
                   required
                   placeholder="Como devo te chamar?"
                   class="w-full px-5 py-3.5 rounded-xl border border-gray-200 focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition bg-white"
@@ -543,7 +489,7 @@
                 >
                 <input
                   type="email"
-                  id="email"
+                  id="email" maxlength="254" autocomplete="email"
                   required
                   placeholder="exemplo@email.com"
                   class="w-full px-5 py-3.5 rounded-xl border border-gray-200 focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition bg-white"
@@ -556,7 +502,7 @@
               >
               <textarea
                 rows="5"
-                id="mensagem"
+                id="mensagem" minlength="5" maxlength="5000"
                 required
                 placeholder="Conte-me um pouco sobre o sistema ou automação que você precisa..."
                 class="w-full px-5 py-3.5 rounded-xl border border-gray-200 focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition bg-white"
@@ -566,11 +512,11 @@
               type="submit"
               class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-200"
             >
-              Enviar Proposta de Projeto
+              Enviar mensagem
             </button>
           </form>
           <div
-            id="formStatus"
+            id="formStatus" role="status" aria-live="polite"
             class="hidden mt-6 p-4 bg-green-100 text-green-700 rounded-xl text-center font-semibold"
           >
             Mensagem enviada com sucesso! Em breve entrarei em contato.
@@ -588,37 +534,15 @@
           <div
             class="flex items-center justify-center md:justify-start gap-3 mb-4"
           >
-            <img
-              src="Logo-pq.jpg"
-              alt="Logo"
-              class="w-8 h-8 rounded"
-              onerror="this.style.display = 'none'"
-            />
-            <p class="font-bold text-2xl tracking-tight">MAJB SISTEMAS</p>
+            <span class="brand-logo"><img src="logo-majb.png" alt="MAJB Sistemas" width="2392" height="1636" /></span>
           </div>
           <p class="text-gray-500 text-sm max-w-xs leading-relaxed">
-            Analista de Sistemask focado em excelência técnica e automação de
+            Consultor de sistemas focado em excelência técnica e automação de
             processos inteligentes.
           </p>
         </div>
 
-        <div class="flex gap-6">
-          <a
-            href="#"
-            class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-blue-600 transition duration-300"
-          >
-            <i
-              data-lucide="linkedin"
-              class="w-5 h-5 text-gray-400 group-hover:text-white"
-            ></i>
-          </a>
-          <a
-            href="#"
-            class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-gray-700 transition duration-300"
-          >
-            <i data-lucide="github" class="w-5 h-5 text-gray-400"></i>
-          </a>
-        </div>
+
 
         <div class="text-center md:text-right">
           <p
@@ -628,7 +552,7 @@
             <span
               id="app-version"
               class="bg-slate-800 text-slate-300 px-2 py-0.5 rounded text-[10px] font-bold"
-              >v1.0.1</span
+              >v2.1.0</span
             >
           </p>
           <p class="text-gray-550 text-[10px] mt-2 italic">
@@ -640,159 +564,116 @@
     </footer>
 
     <script>
-      // 1. Inicializa os ícones do Lucide
-      lucide.createIcons();
-
-      document.addEventListener("DOMContentLoaded", () => {
-        // URL da sua API no Google Apps Script
-        const API_URL =
-          "https://script.google.com/macros/s/AKfycbyR2_Y0Sopp-rh3_gJ_LI9q0gayjo7BFnuRuU2M_IyHmQ7HVQVnc2eI-QywG8cyt6JeZA/exec";
-
-        // =======================================================
-        // 2. REGISTRO AUTOMÁTICO DE VISITAS NA PLANILHA
-        // =======================================================
-        if (!sessionStorage.getItem("visitaRegistrada")) {
-          // 1. Captura dados básicos
-          const infoDispositivo = navigator.userAgent;
-          const parametrosUrl = new URLSearchParams(window.location.search);
-          const termoGoogleAds =
-            parametrosUrl.get("utm_term") || parametrosUrl.get("gclid");
-          const siteOrigem = document.referrer;
-
-          let origemFinal = "Acesso Direto (Digitou o site)";
-          if (termoGoogleAds) origemFinal = "Google Ads / Campanha";
-          else if (siteOrigem) origemFinal = "Veio do site: " + siteOrigem;
-
-          // 2. Tenta buscar o IP. Se falhar (ex: AdBlock), não quebra o sistema.
-          fetch("https://ipapi.co/json/")
-            .then((resposta) => resposta.json())
-            .then((geo) => {
-              if (geo.city && geo.region && geo.country_name) {
-                return `${geo.city} - ${geo.region}, ${geo.country_name}`;
-              }
-              return "Não identificada";
-            })
-            .catch(() => {
-              // Se o navegador bloquear a API, definimos um valor padrão
-              return "Bloqueado pelo Navegador/AdBlock";
-            })
-            .then((localUsuario) => {
-              // 3. Independentemente do resultado do IP, envia para a sua Planilha!
-              fetch(API_URL, {
-                method: "POST",
-                mode: "no-cors",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  action: "registrarVisita",
-                  dados: {
-                    dispositivo: infoDispositivo,
-                    origem: origemFinal,
-                    localizacao: localUsuario,
-                  },
-                }),
-              }).then(() => {
-                sessionStorage.setItem("visitaRegistrada", "true");
-                console.log("✔️ Visita registrada com sucesso no Sheets!");
-              });
-            });
-        }
-
-        // =======================================================
-        // 3. INTEGRAÇÃO DO FORMULÁRIO (Google Sheets + Ads)
-        // =======================================================
-        const formContato = document.getElementById("formContato");
-        const status = document.getElementById("formStatus");
-
-        if (formContato) {
-          formContato.addEventListener("submit", (e) => {
-            e.preventDefault();
-
-            // Captura os campos
-            const inputNome = document.getElementById("nome");
-            const inputEmail = document.getElementById("email");
-            const inputMensagem = document.getElementById("mensagem");
-            const btnEnviar = formContato.querySelector(
-              "button[type='submit']",
-            );
-
-            // Efeito visual de carregamento
-            const textoOriginalBtn = btnEnviar.innerHTML;
-            btnEnviar.innerHTML =
-              '<span class="flex items-center justify-center gap-2 italic"><i data-lucide="loader-2" class="animate-spin w-4 h-4"></i> Processando...</span>';
-            btnEnviar.disabled = true;
-            lucide.createIcons();
-
-            // Dispara a conversão para o Google Ads
-            if (typeof gtag === "function") {
-              gtag("event", "conversion", {
-                send_to: "AW-18115248375/Yc7KCMea06EcEPeBg75D",
-                value: 1.0,
-                currency: "BRL",
-              });
-            }
-
-            // Envia os dados para a planilha via Apps Script
-            fetch(API_URL, {
-              method: "POST",
-              mode: "no-cors",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                action: "novoContato",
-                dados: {
-                  nome: inputNome.value,
-                  email: inputEmail.value,
-                  mensagem: inputMensagem.value,
-                },
-              }),
-            })
-              .then(() => {
-                // Sucesso: Esconde formulário e mostra a mensagem verde
-                formContato.classList.add("hidden");
-                status.classList.remove("hidden");
-              })
-              .catch((err) => {
-                alert(
-                  "Ocorreu um erro ao enviar sua mensagem. Tente novamente.",
-                );
-                console.error("Erro no fetch:", err);
-                // Restaura o botão em caso de erro
-                btnEnviar.innerHTML = textoOriginalBtn;
-                btnEnviar.disabled = false;
-              });
-          });
-        }
-
-        // =======================================================
-        // 4. LÓGICA DE DESTAQUE NO MENU (Scroll Spy)
-        // =======================================================
-        const sections = document.querySelectorAll("section");
-        const navLinks = document.querySelectorAll(".nav-link");
-
-        window.addEventListener("scroll", () => {
-          let current = "";
-
-          sections.forEach((section) => {
-            const sectionTop = section.offsetTop;
-            // Verifica se a rolagem passou do topo da seção
-            if (pageYOffset >= sectionTop - 100) {
-              current = section.getAttribute("id");
-            }
-          });
-
-          navLinks.forEach((link) => {
-            // Remove a cor azul de todos
-            link.classList.remove("bg-blue-600", "text-white");
-            link.classList.add("text-gray-600");
-
-            // Adiciona azul apenas ao que corresponde à seção atual
-            if (link.getAttribute("href").includes(current)) {
-              link.classList.add("bg-blue-600", "text-white");
-              link.classList.remove("text-gray-600");
-            }
-          });
-        });
+document.addEventListener('DOMContentLoaded', () => {
+  if (window.lucide) lucide.createIcons();
+  if (location.protocol === 'file:' || ['localhost','127.0.0.1'].includes(location.hostname)) {
+    document.getElementById('formContato').addEventListener('submit', e => {
+      e.preventDefault();
+      const notice = document.getElementById('formStatus');
+      notice.textContent = 'Esta é uma prévia local. O envio estará disponível no site publicado.';
+      notice.classList.remove('hidden');
+    });
+    return;
+  }
+  const API_URL = 'https://script.google.com/macros/s/AKfycbyR2_Y0Sopp-rh3_gJ_LI9q0gayjo7BFnuRuU2M_IyHmQ7HVQVnc2eI-QywG8cyt6JeZA/exec';
+  // Ativar somente depois de validar o recebimento e a ação de lead no Google Ads.
+  const ADS_CONVERSION = '';
+  const uid = () => crypto.randomUUID();
+  const query = new URLSearchParams(location.search);
+  const read = key => { try { return sessionStorage.getItem(key); } catch { return null; } };
+  const save = (key, value) => { try { sessionStorage.setItem(key, value); } catch {} };
+  let session;
+  try { session = JSON.parse(read('majb_session_v2')); } catch {}
+  // Sessão por aba: não equivale a pessoa única nem a uma sessão do GA4.
+  if (!session) {
+    session = { id: uid(), last: Date.now(), test: query.get('teste') === '1', source: {} };
+    for (const key of ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','gbraid','wbraid']) {
+      session.source[key] = (query.get(key) || '').slice(0, 500);
+    }
+    try { session.source.referrer = document.referrer ? new URL(document.referrer).origin : ''; } catch { session.source.referrer = ''; }
+    session.source.page = location.origin + location.pathname;
+  }
+  if (query.get('teste') === '1') session.test = true;
+  const touch = () => { session.last = Date.now(); save('majb_session_v2', JSON.stringify(session)); };
+  touch();
+  const visitId = session.visitId || uid();
+  session.visitId = visitId; touch();
+  const base = () => ({ session_id: session.id, teste: session.test, origem: session.source, navegador: navigator.userAgent });
+  async function send(payload) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 20000);
+    try {
+      const response = await fetch(API_URL, {
+        method: 'POST', mode: 'cors', redirect: 'follow',
+        headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+        body: JSON.stringify(payload), signal: controller.signal, keepalive: true
       });
+      if (!response.ok) throw new Error('Resposta indisponível');
+      const result = await response.json();
+      if (result.status !== 'sucesso' || result.event_id !== payload.event_id) throw new Error('Gravação não confirmada');
+      return result;
+    } finally { clearTimeout(timeout); }
+  }
+  const event = (name, id = uid(), extra = {}) => send({ action: 'eventoV2', evento: name, event_id: id, ...base(), ...extra });
+  if (!session.visitConfirmed) {
+    event('visita', visitId).then(() => { session.visitConfirmed = true; touch(); }).catch(() => {});
+  }
+  const activity = () => touch();
+  document.addEventListener('pointerdown', activity, { passive: true });
+  document.addEventListener('keydown', activity);
+  document.querySelectorAll('a[href*="wa.me/"]').forEach((link, index) => {
+    link.addEventListener('click', () => { event('clique_whatsapp', uid(), { posicao: index === 0 ? 'inicio' : 'contato' }).catch(() => {}); });
+  });
+  document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
+    link.addEventListener('click', () => { event('clique_email').catch(() => {}); });
+  });
+  const form = document.getElementById('formContato');
+  const status = document.getElementById('formStatus');
+  let contactId = uid();
+  let started = false;
+  form.addEventListener('input', () => {
+    contactId = uid();
+    if (!started) { started = true; event('inicio_formulario').catch(() => {}); }
+  });
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    if (!form.reportValidity()) return;
+    const button = form.querySelector('[type="submit"]');
+    button.disabled = true; button.textContent = 'Enviando...';
+    status.classList.add('hidden');
+    try {
+      await send({ action: 'contatoV2', event_id: contactId, ...base(), dados: {
+        nome: document.getElementById('nome').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        mensagem: document.getElementById('mensagem').value.trim(),
+        website: document.getElementById('website').value
+      } });
+      status.textContent = 'Mensagem recebida! Entrarei em contato pelo e-mail informado.';
+      status.classList.remove('hidden');
+      form.classList.add('hidden');
+      if (!session.test && ADS_CONVERSION && typeof gtag === 'function') {
+        gtag('event', 'conversion', { send_to: ADS_CONVERSION, transaction_id: contactId });
+      }
+    } catch {
+      status.textContent = 'Não foi possível confirmar o recebimento. Tente novamente ou use o WhatsApp. Seus dados continuam no formulário.';
+      status.classList.remove('hidden');
+    } finally { button.disabled = false; button.textContent = 'Enviar mensagem'; }
+  });
+  if (window.lucide) lucide.createIcons();
+  const sections = document.querySelectorAll('section');
+  const navLinks = document.querySelectorAll('.nav-link');
+  window.addEventListener('scroll', () => {
+    let current = 'inicio';
+    sections.forEach(section => { if (window.scrollY >= section.offsetTop - 100) current = section.id; });
+    navLinks.forEach(link => {
+      const active = link.getAttribute('href') === '#' + current;
+      link.classList.toggle('bg-blue-600', active);
+      link.classList.toggle('text-white', active);
+      link.classList.toggle('text-gray-600', !active);
+    });
+  }, { passive: true });
+});
+
     </script>
-    <!-- Estou testando 260908 2039 -->
   </body>
 </html>
