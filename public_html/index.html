@@ -135,6 +135,15 @@
         .floating-whatsapp span { display:none; }
         #contato { padding-bottom:90px; }
       }
+
+      .reviews-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+      .review-card { margin:0; }
+      .review-card blockquote { margin:16px 0 24px; color:#34465a; line-height:1.8; }
+      .review-card figcaption { margin-top:auto; }
+      .review-card cite { display:block; font-style:normal; font-weight:700; }
+      .review-project,.review-excerpt { display:block; font-size:13px; color:#4d5e70; line-height:1.6; margin-top:8px; }
+      .reviews-profile { text-align:center; margin-top:32px; }
+      @media(max-width:900px) { .reviews-grid { grid-template-columns:1fr; } }
     </style>
     <!-- Event snippet for Compra conversion page -->
     <!-- Google tag (gtag.js) -->
@@ -161,7 +170,7 @@
             <!-- Logo Image -->
 <a href="#inicio" aria-label="MAJB Sistemas — início"><span class="brand-logo"><img src="logo-majb.png" alt="MAJB Sistemas" width="2392" height="1636" /></span></a>
           </div>
-          <details class="mobile-nav"><summary>Menu <span aria-hidden="true">☰</span></summary><div class="mobile-nav-links"><a href="#servicos">Serviços</a><a href="#metodo">Como trabalho</a><a href="#portfolio">Experiência</a><a href="#sobre">Sobre</a><a href="#contato">Contato</a></div></details>
+          <details class="mobile-nav"><summary>Menu <span aria-hidden="true">☰</span></summary><div class="mobile-nav-links"><a href="#servicos">Serviços</a><a href="#metodo">Como trabalho</a><a href="#portfolio">Experiência</a><a href="#sobre">Sobre</a><a href="#avaliacoes">Avaliações</a><a href="#contato">Contato</a></div></details>
           <div class="hidden md:block">
             <div
               class="ml-10 flex items-baseline space-x-4 text-sm font-medium"
@@ -181,6 +190,7 @@
                 class="nav-link text-gray-600 px-4 py-2 rounded-lg transition duration-300 font-semibold"
                 >Experiência</a
               >
+              <a href="#avaliacoes" class="nav-link text-gray-600 px-4 py-2 rounded-lg transition duration-300 font-semibold">Avaliações</a>
               <a
                 href="#contato"
                 class="nav-link text-gray-600 px-4 py-2 rounded-lg transition duration-300 font-semibold"
@@ -226,6 +236,34 @@
 <article class="plan-card"><span class="plan-label">REPRESENTAÇÃO BANCÁRIA</span><h3>Indicadores e folha de pagamento</h3><p>Atuação com indicadores de processo e rotinas de folha de pagamento em uma empresa de representação bancária.</p><p class="plan-delivery">Uma experiência ligada ao acompanhamento de informações e controles do negócio.</p><a href="#contato" class="plan-link" data-interest="Indicadores e controles de processos">Conversar sobre meus controles →</a></article>
 </div></div></section>
 <section id="sobre" class="plan-section plan-tint"><div class="plan-container"><div class="plan-heading"><h2>Atendimento direto com quem desenvolve a solução</h2><p>Sou Gerson Bernardo da Silva, à frente da MAJB Sistemas.</p></div><div class="about-layout"><div><p>Minha atuação reúne gestão de processos, indicadores e desenvolvimento de soluções empresariais. Trabalho com estudo contínuo e aplicação prática para entender cada necessidade e construir soluções úteis para a rotina da empresa.</p><p>Você conversa diretamente comigo para alinhar o problema, as possibilidades e as etapas do projeto.</p></div><div class="about-principles"><h3>Compromissos de trabalho</h3><ul><li>Entender o processo antes de propor a ferramenta.</li><li>Definir escopo, entregas e responsabilidades com clareza.</li><li>Validar a solução com quem vai utilizá-la.</li><li>Manter comunicação direta durante o trabalho.</li></ul></div></div></div></section>
+
+    <section id="avaliacoes" class="plan-section" aria-labelledby="avaliacoes-titulo">
+      <div class="plan-container">
+        <div class="plan-heading">
+          <span class="plan-label">AVALIAÇÕES NA WORKANA</span>
+          <h2 id="avaliacoes-titulo">O que os clientes dizem</h2>
+          <p>134 projetos realizados na Workana. Conheça alguns depoimentos de clientes sobre o meu trabalho.</p>
+        </div>
+        <div class="plan-grid reviews-grid">
+          <figure class="plan-card review-card">
+            <span class="plan-label">WORKANA · NOTA 5,0/5</span>
+            <blockquote><p>“Excelente profissional, superou as expectativas, recomendo com certeza a todos.”</p></blockquote>
+            <figcaption><cite>Eduardo Franco</cite><span class="review-project">Macro em Excel para Controle De compras e estoque</span></figcaption>
+          </figure>
+          <figure class="plan-card review-card">
+            <span class="plan-label">WORKANA · NOTA 5,0/5</span>
+            <blockquote><p>“Trabalhar com o Gerson foi uma experiência excelente. Ele demonstrou grande profissionalismo, cumprindo todas as expectativas e prazos com extrema competência. Além de ser altamente qualificado, Gerson foi sempre prestativo e…”</p></blockquote>
+            <figcaption><cite>Ricardo at</cite><span class="review-project">Analisar Documento Word e Excel para poder otimizar processo</span><span class="review-excerpt">Trecho da avaliação</span></figcaption>
+          </figure>
+          <figure class="plan-card review-card">
+            <span class="plan-label">WORKANA · NOTA 5,0/5</span>
+            <blockquote><p>“Gerson é um desses profissionais fora da curva. Entende rápido os escopos, responde de forma rápida e assertiva e se prontifica a fazer o melhor trabalho que pode. Se não quer ter problemas, nem pense duas vezes, pode confiar nele de…”</p></blockquote>
+            <figcaption><cite>Bruno Arouca</cite><span class="review-project">Planilha para Cotação de Frete (Múltiplas Linhas)</span><span class="review-excerpt">Trecho da avaliação</span></figcaption>
+          </figure>
+        </div>
+        <p class="reviews-profile"><a class="plan-link" href="https://www.workana.com/freelancer/796ed4eda7b6a86d17718e1d9d0b0aaf" target="_blank" rel="noopener noreferrer">Ver perfil e avaliações na Workana <span aria-hidden="true">↗</span></a></p>
+      </div>
+    </section>
 <section id="duvidas" class="plan-section "><div class="plan-container"><div class="plan-heading"><h2>Antes da nossa primeira conversa</h2><p>Algumas respostas para você entender como podemos começar.</p></div><div class="faq-list">
 <details><summary>Preciso saber qual sistema ou tecnologia contratar?</summary><p>Não. Comece contando como a rotina funciona e o que está dificultando o trabalho. A escolha da ferramenta vem depois de entendermos a necessidade.</p></details>
 <details><summary>É possível trabalhar com as planilhas que já utilizo?</summary><p>Podemos avaliar as planilhas e os controles existentes para entender o que pode ser organizado, aproveitado ou automatizado. A solução depende dessa análise.</p></details>
